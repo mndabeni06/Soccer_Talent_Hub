@@ -141,9 +141,9 @@ app.config['JWT_EXPIRATION_DELTA'] = datetime.timedelta(days=2)
    #     return user
 
 # identify registered user by user id
-def identity(payload):
-    user_id = payload['identity']
-    return userid_table.get(user_id, None)
+#def identity(payload):
+   # user_id = payload['identity']
+   # return userid_table.get(user_id, None)
 
 #  Creating my landing page of heroku
 
