@@ -1,15 +1,12 @@
 # Mpendulo Khoza
 # Masimthembe Ndabeni
-import hmac
-import sqlite3
 import re
-import datetime
-from flask import Flask, request, jsonify, redirect, render_template
-from flask_jwt import JWT, jwt_required, current_identity
-from flask_cors import CORS, cross_origin
-from flask_mail import Mail,Message
-from smtplib import SMTPRecipientsRefused, SMTPAuthenticationError
-from werkzeug.utils import redirect
+import sqlite3
+from sqlite3.dbapi2 import Cursor
+
+from flask import Flask, json, request
+from flask_cors import CORS
+from werkzeug.wrappers import response
 
 
 class Database:
@@ -56,7 +53,7 @@ class Database:
                          "lastname TEXT NOT NULL,"
                          "nickname TEXT NOT NULL,"
                          "age TEXT NOT NULL,"
-                         "gender TEXT NOT NULL,"
+                        "gender TEXT NOT NULL,"
                          "date_of_birth TEXT NOT NULL,"
                          "place_of_birth TEXT NOT NULL,"
                          "home_address TEXT NOT NULL,"
@@ -105,47 +102,11 @@ def dict_factory(cursor, row):
 
 # creating my My Flask App
 app = Flask(__name__)
-app.debug = True
+app.debuge = True
 CORS(app)
-
-# setting up flask-mail
-app.config['MAIL_SERVER']='smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'mndabeni6@gmail.com'
-app.config['MAIL_PASSWORD'] = '0733887645'
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
-mail = Mail(app)
-CORS(app)
-app.debug = True
-app.config['SECRET_KEY'] = 'super-secret'
-app.config['JWT_EXPIRATION_DELTA'] = datetime.timedelta(days=2)
-
-
-#authanticate a loggen in user
-#jwt = JWT(app, authenticate, identity)
-
-#for data in user:
-           # new_data.append(User(data[0], data[3], data[4],data[5],data[6],data[7])) # append all data to new_data empty list
-   # return new_data
-
-# user = fetch_users() # declare users tables to a variable "users"
-
-#username_table = { u.username: u for u in users } # make a dictionary for username
-#userid_table = { u.id: u for u in users } # make a dictionary for user id
-
-# set authantication for username and password
-#def authenticate(username, password):
-   # user = username_table.get(username, None)
-   # if user and hmac.compare_digest(user.password.encode('utf-8'), password.encode('utf-8')):
-   #     return user
-
-# identify registered user by user id
-#def identity(payload):
-   # user_id = payload['identity']
-   # return userid_table.get(user_id, None)
 
 #  Creating my landing page of heroku
+
 
 @app.route('/', methods=['GET'])
 def welcome():
