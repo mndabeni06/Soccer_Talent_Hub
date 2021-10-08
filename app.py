@@ -131,14 +131,14 @@ app.config['JWT_EXPIRATION_DELTA'] = datetime.timedelta(days=2)
 
 # user = fetch_users() # declare users tables to a variable "users"
 
-username_table = { u.username: u for u in users } # make a dictionary for username
-userid_table = { u.id: u for u in users } # make a dictionary for user id
+#username_table = { u.username: u for u in users } # make a dictionary for username
+#userid_table = { u.id: u for u in users } # make a dictionary for user id
 
 # set authantication for username and password
-def authenticate(username, password):
-    user = username_table.get(username, None)
-    if user and hmac.compare_digest(user.password.encode('utf-8'), password.encode('utf-8')):
-        return user
+#def authenticate(username, password):
+   # user = username_table.get(username, None)
+   # if user and hmac.compare_digest(user.password.encode('utf-8'), password.encode('utf-8')):
+   #     return user
 
 # identify registered user by user id
 def identity(payload):
